@@ -5,57 +5,64 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.ColumnDefault;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table
-public class Cities {
-
+public class CityUpdate {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String ccode;
-
+	private int id;
+	@Column
+	private String sid;
+	@Column
+	private String name;
+	@Column
+	private String date;
 	@Column
 	private int active;
-
 	@Column
 	private int total;
 	@Column
 	private int decease;
 	@Column
-
 	private int recover;
-	@Column
-	private String date;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	
 	
-	@JsonManagedReference
-	@ManyToOne
-	@JoinColumn(name = "stateId", referencedColumnName = "id")
-	private States states;
-
-	public States getState() {
-		return states;
+	public int getId() {
+		return id;
 	}
 
-	public void setState(States state) {
-		this.states = state;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getCcode() {
-		return ccode;
+	public String getSid() {
+		return sid;
 	}
 
-	public void setCcode(String ccode) {
-		this.ccode = ccode;
+	public void setSid(String sid) {
+		this.sid = sid;
+	}
+
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	public int getActive() {
@@ -90,24 +97,18 @@ public class Cities {
 		this.recover = recover;
 	}
 
-	public String getDate() {
-		return date;
+	public CityUpdate() {
+
 	}
 
-	public void setDate(String date) {
+	public CityUpdate(String sid, String name, String date, int active, int total, int decease, int recover) {
+		this.sid = sid;
+		this.name = name;
 		this.date = date;
-	}
-
-	public Cities(String ccode, int active, int total, int decease, int recover, String date) {
-		this.ccode = ccode;
 		this.active = active;
 		this.total = total;
 		this.decease = decease;
 		this.recover = recover;
-		this.date = date;
-	}
-
-	public Cities() {
 	}
 
 }
